@@ -33,7 +33,7 @@ export default function BlogDetails({ blog }) {
         <div>
           <h2>{editedBlog.title}</h2>
           <p>{editedBlog.body}</p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button className="bg-green-300 mr-4 px-4 py-2" onClick={() => setIsEditing(true)}>Edit</button>
         </div>
       )}
       <button onClick={() => router.push("/")}>Go Back</button>
