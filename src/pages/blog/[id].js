@@ -42,7 +42,7 @@ export default function BlogDetails({ blog }) {
 }
 
 export async function getStaticPaths() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const response = await fetch(`${process.env.Blog_API_URL}`);
   const blogs = await response.json();
 
   const paths = blogs.slice(0, 10).map((blog) => ({
@@ -53,7 +53,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+  const response = await fetch(`${process.env.BLOG_API_URL}/${params.id}`);
   const blog = await response.json();
 
   return {
