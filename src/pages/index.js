@@ -52,7 +52,7 @@ export default function Home({ blogs }) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch(`${process.env.BLOG_API_URL}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}`);
   const blogs = await response.json();
 
   return {
