@@ -52,8 +52,9 @@ export default function BlogDetails({ blog }) {
 }
 
 export async function getStaticPaths() {
+  const API_URL = process.env.NEXT_PUBLIC_BLOG_API_URL || "http://localhost:3000/api";
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}`);
+    const response = await fetch(API_URL);
     if (!response.ok) throw new Error("Failed to fetch blogs");
     const blogs = await response.json();
 
@@ -69,8 +70,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  const API_URL = process.env.NEXT_PUBLIC_BLOG_API_URL || "http://localhost:3000/api";
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}/${params.id}`);
+    const response = await fetch(`API_URL/${params.id}`);
     if (!response.ok) throw new Error("Failed to fetch blog details");
     const blog = await response.json();
 

@@ -31,7 +31,7 @@ export default function Home({ blogs }) {
 
   return (
     <div>
-      <h1>Blog Site</h1>
+      {/* <h1>Blog Sitetttttttttttttttttt</h1> */}
       {/* <Link href="/blog/create">
         <button>Create New Blog</button>
       </Link> */}
@@ -52,7 +52,8 @@ export default function Home({ blogs }) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BLOG_API_URL}`);
+  const API_URL = process.env.NEXT_PUBLIC_BLOG_API_URL || "http://localhost:3000/api";
+  const response = await fetch(API_URL);
   const blogs = await response.json();
 
   return {
