@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function BlogDetails({ blog }) {
   const router = useRouter();
@@ -53,7 +53,12 @@ export default function BlogDetails({ blog }) {
 
 export async function getStaticPaths() {
   const API_URL =
-  process.env.NEXT_PUBLIC_BLOG_API_URL || (process.env.NODE_ENV === "development" && "http://localhost:3000/api");
+    process.env.NEXT_PUBLIC_BLOG_API_URL 
+
+  if (!API_URL) {
+    console.error("NEXT_PUBLIC_BLOG_API_URL is not defined");
+    return { paths: [], fallback: true }; // Prevent build failure
+  }
 
   try {
     const response = await fetch(API_URL);
@@ -73,10 +78,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const API_URL =
-  process.env.NEXT_PUBLIC_BLOG_API_URL || (process.env.NODE_ENV === "development" && "http://localhost:3000/api");
+    process.env.NEXT_PUBLIC_BLOG_API_URL 
+
+  if (!API_URL) {
+    console.error("NEXT_PUBLIC_BLOG_API_URL is not defined");
+    return { notFound: true }; // Show 404 if API URL is missing
+  }
 
   try {
-    const response = await fetch(`API_URL/${params.id}`);
+    const response = await fetch(`${API_URL}/${params.id}`); // Fixed interpolation
     if (!response.ok) throw new Error("Failed to fetch blog details");
     const blog = await response.json();
 
